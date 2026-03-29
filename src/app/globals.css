@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 4%;
+    --foreground: 210 40% 96%;
+    --card: 222 40% 6%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 40% 6%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 186 100% 50%;
+    --primary-foreground: 222 47% 4%;
+    --secondary: 217 33% 12%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 33% 10%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 271 100% 50%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 217 33% 15%;
+    --input: 217 33% 12%;
+    --ring: 186 100% 50%;
+    --radius: 0.75rem;
+
+    /* Custom neon palette */
+    --neon-cyan: #00f5ff;
+    --neon-purple: #bf00ff;
+    --neon-green: #39ff14;
+    --neon-orange: #ff6b00;
+    --neon-pink: #ff00aa;
+    --neon-yellow: #ffee00;
+
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(0, 245, 255, 0.03) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(191, 0, 255, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgba(57, 255, 20, 0.02) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(0, 245, 255, 0.25);
+    color: #ffffff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 245, 255, 0.3);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 245, 255, 0.6);
+  }
+}
+
+@layer components {
+  /* ── Glass card ─────────────────────────────────── */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(0, 245, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 245, 255, 0.1);
+    transform: translateY(-1px);
+  }
+
+  /* ── Neon text effects ──────────────────────────── */
+  .neon-text-cyan {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6), 0 0 30px rgba(0, 245, 255, 0.3);
+  }
+
+  .neon-text-purple {
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px rgba(191, 0, 255, 0.6), 0 0 30px rgba(191, 0, 255, 0.3);
+  }
+
+  .neon-text-green {
+    color: var(--neon-green);
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.6), 0 0 30px rgba(57, 255, 20, 0.3);
+  }
+
+  /* ── Neon borders ───────────────────────────────── */
+  .neon-border-cyan {
+    border-color: rgba(0, 245, 255, 0.4);
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.15), inset 0 0 12px rgba(0, 245, 255, 0.05);
+  }
+
+  .neon-border-purple {
+    border-color: rgba(191, 0, 255, 0.4);
+    box-shadow: 0 0 12px rgba(191, 0, 255, 0.15), inset 0 0 12px rgba(191, 0, 255, 0.05);
+  }
+
+  /* ── Gradient text ──────────────────────────────── */
+  .gradient-text-cyan-purple {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-text-green-cyan {
+    background: linear-gradient(135deg, var(--neon-green) 0%, var(--neon-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ── Grid background ────────────────────────────── */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(0, 245, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 245, 255, 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── Shimmer loading ────────────────────────────── */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* ── Score pill ─────────────────────────────────── */
+  .score-pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold;
+    background: rgba(0, 245, 255, 0.1);
+    border: 1px solid rgba(0, 245, 255, 0.25);
+    color: var(--neon-cyan);
+  }
+
+  /* ── Status badge variants ──────────────────────── */
+  .badge-registered {
+    background: rgba(100, 116, 139, 0.15);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+    color: #94a3b8;
+  }
+
+  .badge-presenting {
+    background: rgba(0, 245, 255, 0.1);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    color: var(--neon-cyan);
+    animation: neon-pulse 2s ease-in-out infinite;
+  }
+
+  .badge-done {
+    background: rgba(57, 255, 20, 0.1);
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    color: var(--neon-green);
+  }
+
+  /* ── Vote buttons ───────────────────────────────── */
+  .vote-btn {
+    @apply flex flex-col items-center justify-center gap-2 p-4 rounded-2xl border-2 transition-all duration-200 select-none cursor-pointer;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .vote-btn:hover {
+    transform: scale(1.04) translateY(-2px);
+  }
+
+  .vote-btn-like.selected {
+    background: rgba(57, 255, 20, 0.12);
+    border-color: rgba(57, 255, 20, 0.5);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+  }
+
+  .vote-btn-neutral.selected {
+    background: rgba(255, 238, 0, 0.12);
+    border-color: rgba(255, 238, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 238, 0, 0.2);
+  }
+
+  .vote-btn-dislike.selected {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+  }
+
+  /* ── Countdown ring ─────────────────────────────── */
+  .countdown-ring {
+    filter: drop-shadow(0 0 8px var(--neon-cyan));
+  }
+
+  /* ── Rank medal ─────────────────────────────────── */
+  .rank-1 { color: #FFD700; text-shadow: 0 0 12px rgba(255, 215, 0, 0.7); }
+  .rank-2 { color: #C0C0C0; text-shadow: 0 0 12px rgba(192, 192, 192, 0.6); }
+  .rank-3 { color: #CD7F32; text-shadow: 0 0 12px rgba(205, 127, 50, 0.6); }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Clash Display', 'DM Sans', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* scan line overlay effect */
+  .scan-overlay::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.015) 2px,
+      rgba(0, 0, 0, 0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+}
